@@ -8,19 +8,13 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.*;
-import butterknife.Bind;
-import butterknife.OnClick;
-import butterknife.OnItemClick;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.InterstitialAd;
-import com.google.gson.Gson;
-import com.pnikosis.materialishprogress.ProgressWheel;
-import com.squareup.picasso.Picasso;
-import de.greenrobot.event.EventBus;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
 import com.cntt.freemusicdownloadnow.MyApplication;
-import mp3onlinepro.trungpt.com.mp3onlinepro.R;
 import com.cntt.freemusicdownloadnow.base.BaseFragment;
 import com.cntt.freemusicdownloadnow.base.StringUtils;
 import com.cntt.freemusicdownloadnow.event.PlayerPreparedEvent;
@@ -38,16 +32,27 @@ import com.cntt.freemusicdownloadnow.ui.customview.ArcImageView;
 import com.cntt.freemusicdownloadnow.ui.customview.EndlessScrollListener;
 import com.cntt.freemusicdownloadnow.ui.model.Song;
 import com.cntt.freemusicdownloadnow.utils.Const;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.gson.Gson;
+import com.pnikosis.materialishprogress.ProgressWheel;
+import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.OnClick;
+import butterknife.OnItemClick;
+import de.greenrobot.event.EventBus;
+import mp3onlinepro.trungpt.com.mp3onlinepro.R;
+
 /**
  * Created by TRUNGPT on 8/11/16.
  */
-public class SongListFragment extends BaseFragment implements AsyncTaskGetListener
-{
+public class SongListFragment extends BaseFragment implements AsyncTaskGetListener {
     @Bind(R.id.fragment_songlist_listview)
     ListView listView;
     @Bind(R.id.fragment_songlist_progressbar)
@@ -80,8 +85,7 @@ public class SongListFragment extends BaseFragment implements AsyncTaskGetListen
     private Song currentSong;
     SharedPreferences sharedPreferences;
 
-    public void onCreate(@Nullable Bundle savedInstanceState)
-    {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EventBus.getDefault().register(this);
         categoryKey = getArguments().getString("categoryKey");
@@ -89,22 +93,18 @@ public class SongListFragment extends BaseFragment implements AsyncTaskGetListen
     }
 
     @Override
-    public int getLayout()
-    {
+    public int getLayout() {
         return R.layout.fragment_songlist;
     }
 
     @Override
-    public void setDataToView(Bundle savedInstanceState)
-    {
+    public void setDataToView(Bundle savedInstanceState) {
         //=====================ADS==================================
         mInterstitialAd = new InterstitialAd(getActivity());
         mInterstitialAd.setAdUnitId(getString(R.string.ads_fullscreen));
-        mInterstitialAd.setAdListener(new AdListener()
-        {
+        mInterstitialAd.setAdListener(new AdListener() {
             @Override
-            public void onAdClosed()
-            {
+            public void onAdClosed() {
                 requestNewInterstitial();
             }
         });
@@ -113,42 +113,33 @@ public class SongListFragment extends BaseFragment implements AsyncTaskGetListen
 
         rotation = AnimationUtils.loadAnimation(getActivity(), R.anim.rotate);
         rotation.setFillAfter(true);
-        String  json = sharedPreferences.getString("current_song","");
-        if (StringUtils.isNotEmpty(json))
-        {
-            currentSong = new Gson().fromJson(json,Song.class);
+        String json = sharedPreferences.getString("current_song", "");
+        if (StringUtils.isNotEmpty(json)) {
+            currentSong = new Gson().fromJson(json, Song.class);
             updateUI();
-            if ( ((MyApplication) getActivity().getApplicationContext()).getMusicService().getMusicState().equals(MusicState.PAUSE))
-            {
+            if (((MyApplication) getActivity().getApplicationContext()).getMusicService().getMusicState().equals(MusicState.PAUSE)) {
                 btPlay.setVisibility(View.VISIBLE);
                 btPause.setVisibility(View.GONE);
-            }
-            else if ( ((MyApplication) getActivity().getApplicationContext()).getMusicService().getMusicState().equals(MusicState.PLAYING))
-            {
+            } else if (((MyApplication) getActivity().getApplicationContext()).getMusicService().getMusicState().equals(MusicState.PLAYING)) {
                 btPlay.setVisibility(View.GONE);
                 btPause.setVisibility(View.VISIBLE);
             }
         }
         ((MyApplication) getActivity().getApplicationContext()).getMusicService().getSongs().clear();
 
-        GetSongAsync songAsync = new GetSongAsync("trending",categoryKey,0);
+        GetSongAsync songAsync = new GetSongAsync("trending", categoryKey, 0);
         songAsync.setListener(this);
         songAsync.execute();
-        EndlessScrollListener endlessScrollListener = new EndlessScrollListener()
-        {
+        EndlessScrollListener endlessScrollListener = new EndlessScrollListener() {
             @Override
-            public boolean onLoadMore(int page, int totalItemsCount)
-            {
+            public boolean onLoadMore(int page, int totalItemsCount) {
                 progressBar.setVisibility(View.VISIBLE);
-                if (StringUtils.isNotEmpty(nextHref))
-                {
-                    GetSongAsync songAsync = new GetSongAsync("trending",categoryKey,offset);
+                if (StringUtils.isNotEmpty(nextHref)) {
+                    GetSongAsync songAsync = new GetSongAsync("trending", categoryKey, offset);
                     songAsync.setListener(SongListFragment.this);
                     songAsync.execute();
                     return true;
-                }
-                else
-                {
+                } else {
                     progressBar.setVisibility(View.GONE);
                     return false;
                 }
@@ -159,8 +150,7 @@ public class SongListFragment extends BaseFragment implements AsyncTaskGetListen
     }
 
     @OnItemClick(R.id.fragment_songlist_listview)
-    public void clickSong(final int position)
-    {
+    public void clickSong(final int position) {
         minibar.setVisibility(View.VISIBLE);
         progressWheel.setVisibility(View.VISIBLE);
         currentSong = adapter.getData().get(position);
@@ -171,8 +161,7 @@ public class SongListFragment extends BaseFragment implements AsyncTaskGetListen
         btPause.setVisibility(View.VISIBLE);
     }
 
-    private void updateUI()
-    {
+    private void updateUI() {
         tvTitle.setText(currentSong.getTitle());
         tvArtist.setText(currentSong.getArtist());
         Picasso.with(getActivity())
@@ -181,32 +170,24 @@ public class SongListFragment extends BaseFragment implements AsyncTaskGetListen
                 .into(ivMiniBarThumbnail);
     }
 
-    public void songPicked(final int position)
-    {
-        try
-        {
+    public void songPicked(final int position) {
+        try {
             ((MyApplication) getActivity().getApplicationContext()).getMusicService().setSongIndex(position);
             ((MyApplication) getActivity().getApplicationContext()).getMusicService().play();
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
-        SongListFragment.this.getActivity().runOnUiThread(new Runnable()
-        {
+        SongListFragment.this.getActivity().runOnUiThread(new Runnable() {
             @Override
-            public void run()
-            {
+            public void run() {
                 refreshListViewSelection(position);
             }
         });
     }
 
-    private synchronized void refreshListViewSelection(final int position)
-    {
-        synchronized (adapter)
-        {
+    private synchronized void refreshListViewSelection(final int position) {
+        synchronized (adapter) {
             adapter.setSelectedIndex(position);
             listView.invalidateViews();
             listView.requestLayout();
@@ -214,13 +195,11 @@ public class SongListFragment extends BaseFragment implements AsyncTaskGetListen
     }
 
 
-    public void onEventMainThread(UpdateProgressEvent event)
-    {
+    public void onEventMainThread(UpdateProgressEvent event) {
         arcImageView.setProgress(event.getProgress());
     }
 
-    public void onEventMainThread(PlayerPreparedEvent event)
-    {
+    public void onEventMainThread(PlayerPreparedEvent event) {
         ivCircleButton.setVisibility(View.VISIBLE);
         btPlay.setVisibility(View.GONE);
         btPause.setVisibility(View.VISIBLE);
@@ -230,27 +209,23 @@ public class SongListFragment extends BaseFragment implements AsyncTaskGetListen
 
 
     @OnClick(R.id.mini_bar_pause_button)
-    public void pauseClick()
-    {
+    public void pauseClick() {
         ((MyApplication) getActivity().getApplicationContext()).getMusicService().pause();
         btPlay.setVisibility(View.VISIBLE);
         btPause.setVisibility(View.GONE);
     }
 
     @OnClick(R.id.mini_bar_play_button)
-    public void resumeClick()
-    {
+    public void resumeClick() {
         ((MyApplication) getActivity().getApplicationContext()).getMusicService().resume();
         btPlay.setVisibility(View.GONE);
         btPause.setVisibility(View.VISIBLE);
     }
 
     @OnClick(R.id.mini_bar_rlContent)
-    public void clickSongDetails()
-    {
+    public void clickSongDetails() {
         mInterstitialAd.show();
-        if (currentSong != null)
-        {
+        if (currentSong != null) {
             Intent intent = new Intent(getActivity(), SongDetailsActivity.class);
             intent.putExtra("song", currentSong);
             startActivity(intent);
@@ -259,25 +234,19 @@ public class SongListFragment extends BaseFragment implements AsyncTaskGetListen
 
     }
 
-    public void onEventMainThread(final UpdateUIEvent event)
-    {
+    public void onEventMainThread(final UpdateUIEvent event) {
 
         MusicState musicState = event.getMusicState();
         currentSong = event.getSong();
-        if (musicState == MusicState.PAUSE)
-        {
+        if (musicState == MusicState.PAUSE) {
             btPlay.setVisibility(View.VISIBLE);
             btPause.setVisibility(View.GONE);
-        }
-        else if (musicState == MusicState.PLAYING)
-        {
+        } else if (musicState == MusicState.PLAYING) {
             btPlay.setVisibility(View.GONE);
             btPause.setVisibility(View.VISIBLE);
-            SongListFragment.this.getActivity().runOnUiThread(new Runnable()
-            {
+            SongListFragment.this.getActivity().runOnUiThread(new Runnable() {
                 @Override
-                public void run()
-                {
+                public void run() {
                     refreshListViewSelection(event.getSongIndex());
                 }
             });
@@ -289,44 +258,34 @@ public class SongListFragment extends BaseFragment implements AsyncTaskGetListen
 
 
     @Override
-    public void prepare()
-    {
+    public void prepare() {
         progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
-    public void complete(Object obj)
-    {
+    public void complete(Object obj) {
         final List<Song> songs = new ArrayList<Song>();
-        if(obj instanceof  CategoriesDTO)
-        {
-            CategoriesDTO categoriesDTO = (CategoriesDTO)obj;
+        if (obj instanceof CategoriesDTO) {
+            CategoriesDTO categoriesDTO = (CategoriesDTO) obj;
             List<TrackDTO> trackDTOs = categoriesDTO.getTrackDTOs();
-            for (TrackDTO trackDTO : trackDTOs)
-            {
+            for (TrackDTO trackDTO : trackDTOs) {
                 songs.add(Song.convertFromSongDTO(trackDTO.getTrackDetailDTO()));
             }
             nextHref = categoriesDTO.getNextHref();
-        }
-        else
-        {
+        } else {
             List<TrackDetailDTO> trackDetailDTOs = (List<TrackDetailDTO>) obj;
             songs.addAll(Song.convertSongFromSongDTO(trackDetailDTOs));
             nextHref = "not null";
         }
-        if (adapter == null)
-        {
+        if (adapter == null) {
             adapter = new ListViewAdapter(getActivity(), songs);
             listView.setAdapter(adapter);
-            ((MyApplication) getActivity().getApplicationContext()).getMusicService().setSongs(songs);
-        }
-        else
-        {
-            getActivity().runOnUiThread(new Runnable()
-            {
+            if (isAdded())
+                ((MyApplication) getActivity().getApplicationContext()).getMusicService().setSongs(songs);
+        } else {
+            getActivity().runOnUiThread(new Runnable() {
                 @Override
-                public void run()
-                {
+                public void run() {
                     ((MyApplication) getActivity().getApplicationContext()).getMusicService().getSongs().addAll(songs);
                     adapter.getData().addAll(songs);
                     adapter.notifyDataSetChanged();
@@ -345,8 +304,8 @@ public class SongListFragment extends BaseFragment implements AsyncTaskGetListen
 
     //=============================ADS============================
     InterstitialAd mInterstitialAd;
-    private void requestNewInterstitial()
-    {
+
+    private void requestNewInterstitial() {
         AdRequest adRequest = new AdRequest.Builder()
                 .build();
         mInterstitialAd.loadAd(adRequest);
