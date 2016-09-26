@@ -5,7 +5,11 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
-import android.content.*;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
@@ -23,11 +27,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
 import android.widget.Toast;
-import com.google.gson.Gson;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
-import de.greenrobot.event.EventBus;
-import mp3onlinepro.trungpt.com.mp3onlinepro.R;
+
 import com.cntt.freemusicdownloadnow.event.BufferingUpdateEvent;
 import com.cntt.freemusicdownloadnow.event.PlayerPreparedEvent;
 import com.cntt.freemusicdownloadnow.event.UpdateProgressEvent;
@@ -35,10 +35,16 @@ import com.cntt.freemusicdownloadnow.event.UpdateUIEvent;
 import com.cntt.freemusicdownloadnow.ui.activity.SongDetailsActivity;
 import com.cntt.freemusicdownloadnow.ui.model.Song;
 import com.cntt.freemusicdownloadnow.utils.Utilities;
+import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import de.greenrobot.event.EventBus;
+import mp3onlinepro.trungpt.com.mp3onlinepro.R;
 
 /**
  * Created by TRUNGPT on 7/26/16.
@@ -78,29 +84,24 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
 
     SharedPreferences sharedPreferences;
 
-    public void setRepeat(boolean repeat)
-    {
+    public void setRepeat(boolean repeat) {
         isRepeat = repeat;
     }
 
-    public boolean isRepeat()
-    {
+    public boolean isRepeat() {
         return isRepeat;
     }
 
     @Override
-    public void onBufferingUpdate(MediaPlayer mp, int percent)
-    {
+    public void onBufferingUpdate(MediaPlayer mp, int percent) {
         Log.e("trung dai ca", percent + "");
         EventBus.getDefault().post(new BufferingUpdateEvent(percent));
     }
 
     @Override
-    public boolean onInfo(MediaPlayer mp, int what, int extra)
-    {
+    public boolean onInfo(MediaPlayer mp, int what, int extra) {
         MusicState musicStateTemp = musicState;
-        switch (what)
-        {
+        switch (what) {
 
             case MediaPlayer.MEDIA_INFO_BUFFERING_START:
                 musicState = MusicState.BUFFERING;
@@ -115,17 +116,14 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
 
     }
 
-    public class MusicBinder extends Binder
-    {
-        public MusicService getService()
-        {
+    public class MusicBinder extends Binder {
+        public MusicService getService() {
             return MusicService.this;
         }
     }
 
     @Override
-    public void onCreate()
-    {
+    public void onCreate() {
         super.onCreate();
         sharedPreferences = getApplicationContext().getSharedPreferences("song_temp", MODE_PRIVATE);
         audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
@@ -134,19 +132,15 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
         registerRemoteClient();
     }
 
-    public void initMediaPlayerIfNeed()
-    {
-        if (player == null)
-        {
+    public void initMediaPlayerIfNeed() {
+        if (player == null) {
             player = new MediaPlayer();
             player.setWakeMode(getApplicationContext(),
                     PowerManager.PARTIAL_WAKE_LOCK);
             player.setAudioStreamType(AudioManager.STREAM_MUSIC);
 
 
-        }
-        else
-        {
+        } else {
             player.reset();
         }
         player.setOnPreparedListener(this);
@@ -157,15 +151,13 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
     }
 
 
-    public int onStartCommand(Intent intent, int flags, int startId)
-    {
+    public int onStartCommand(Intent intent, int flags, int startId) {
         return START_STICKY;
     }
 
 
     @Override
-    public void onPrepared(MediaPlayer mp)
-    {
+    public void onPrepared(MediaPlayer mp) {
         player.setLooping(isRepeat);
         player.start();
         musicState = MusicState.PLAYING;
@@ -176,8 +168,7 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
 
     @Nullable
     @Override
-    public IBinder onBind(Intent intent)
-    {
+    public IBinder onBind(Intent intent) {
         mediaControlsBroadcastReceiver = new MediaControlsBroadcastReceiver();
         IntentFilter theFilter = new IntentFilter();
         registerReceiver(mediaControlsBroadcastReceiver, theFilter);
@@ -185,28 +176,22 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
     }
 
     @Override
-    public void onCompletion(MediaPlayer mp)
-    {
+    public void onCompletion(MediaPlayer mp) {
 
-        if (!isRepeat)
-        {
+        if (!isRepeat) {
             next();
-        }
-        else
-        {
+        } else {
             player.start();
         }
     }
 
     @Override
-    public boolean onError(MediaPlayer mp, int what, int extra)
-    {
+    public boolean onError(MediaPlayer mp, int what, int extra) {
         return true;
     }
 
     @Override
-    public void play() throws IOException
-    {
+    public void play() throws IOException {
         Log.e("trung dai caplay", songIndex + "");
         musicState = MusicState.BUFFERING;
         initMediaPlayerIfNeed();
@@ -219,17 +204,13 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
         saveToSharePreference(songs.get(songIndex));
     }
 
-    private void saveToSharePreference(Song song)
-    {
+    private void saveToSharePreference(Song song) {
         SharedPreferences.Editor prefsEditor = sharedPreferences.edit();
         Gson gson = new Gson();
         String json;
-        if (song != null)
-        {
+        if (song != null) {
             json = gson.toJson(song); // myObject - instance of MyObject
-        }
-        else
-        {
+        } else {
             json = "";
         }
         prefsEditor.putString("current_song", json);
@@ -237,10 +218,8 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
     }
 
     @Override
-    public void pause()
-    {
-        if (player != null && musicState == MusicState.PLAYING)
-        {
+    public void pause() {
+        if (player != null && musicState == MusicState.PLAYING) {
             player.pause();
             musicState = MusicState.PAUSE;
             currentDuration = player.getCurrentPosition();
@@ -249,15 +228,12 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
     }
 
     @Override
-    public void stop()
-    {
-        if (player != null)
-        {
+    public void stop() {
+        if (player != null) {
             player.stop();
             player.release();
             player = null;
-            if (mNotificationManager != null)
-            {
+            if (mNotificationManager != null) {
                 mNotificationManager.cancel(NOTIFICATION_ID);
             }
         }
@@ -265,60 +241,43 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
     }
 
     @Override
-    public void next()
-    {
-        if (songIndex < songs.size() - 1)
-        {
+    public void next() {
+        if (songIndex < songs.size() - 1) {
             songIndex = songIndex + 1;
             Log.e("trung dai canext", songIndex + "");
-            try
-            {
+            try {
                 play();
-            }
-            catch (IOException e)
-            {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
-        else
-        {
+        } else {
             Toast.makeText(this, "No have song index", Toast.LENGTH_LONG).show();
         }
     }
 
     @Override
-    public void previous()
-    {
-        if (songIndex > 0)
-        {
+    public void previous() {
+        if (songIndex > 0) {
             songIndex = songIndex - 1;
-            try
-            {
+            try {
                 play();
-            }
-            catch (IOException e)
-            {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
 
-        }
-        else
-        {
+        } else {
             Toast.makeText(this, "No song index", Toast.LENGTH_LONG).show();
         }
     }
 
     @Override
-    public void repeat(boolean isRepeat)
-    {
+    public void repeat(boolean isRepeat) {
         this.isRepeat = isRepeat;
     }
 
     @Override
-    public void resume()
-    {
-        if (player != null && musicState == MusicState.PAUSE && currentSong != null)
-        {
+    public void resume() {
+        if (player != null && musicState == MusicState.PAUSE && currentSong != null) {
             player.seekTo(currentDuration);
             player.start();
             musicState = MusicState.PLAYING;
@@ -327,8 +286,7 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
     }
 
     @Override
-    public void seekTo(int progress)
-    {
+    public void seekTo(int progress) {
         player.seekTo(progress);
 //        player.start();
         musicState = MusicState.PLAYING;
@@ -336,72 +294,55 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
     }
 
     @Override
-    public void onAudioFocusChange(int focusChange)
-    {
-        switch (focusChange)
-        {
+    public void onAudioFocusChange(int focusChange) {
+        switch (focusChange) {
 
         }
     }
 
-    public void setSongs(List<Song> songs)
-    {
+    public void setSongs(List<Song> songs) {
         this.songs = songs;
     }
 
-    public List<Song> getSongs()
-    {
+    public List<Song> getSongs() {
         return songs;
     }
 
-    public void setSongIndex(int songIndex)
-    {
+    public void setSongIndex(int songIndex) {
         this.songIndex = songIndex;
     }
 
-    private Runnable mUpdateTimeTask = new Runnable()
-    {
-        public void run()
-        {
+    private Runnable mUpdateTimeTask = new Runnable() {
+        public void run() {
             long totalDuration = 0;
-            try
-            {
-                if (player != null)
-                {
+            try {
+                if (player != null) {
                     totalDuration = player.getDuration();
                 }
-            }
-            catch (IllegalStateException e)
-            {
+            } catch (IllegalStateException e) {
                 e.printStackTrace();
             }
             long currentDuration = 0;
-            try
-            {
-                if (player != null)
-                {
+            try {
+                if (player != null) {
                     currentDuration = player.getCurrentPosition();
                 }
-            }
-            catch (IllegalStateException e)
-            {
+            } catch (IllegalStateException e) {
                 e.printStackTrace();
             }
             float progress = (utils.getProgressPercentage(currentDuration,
                     totalDuration));
-            EventBus.getDefault().post(new UpdateProgressEvent(progress,currentDuration));
+            EventBus.getDefault().post(new UpdateProgressEvent(progress, currentDuration));
             progressBarHandler.postDelayed(this, 100);
         }
     };
 
-    public void updateProgressBar()
-    {
+    public void updateProgressBar() {
         progressBarHandler.postDelayed(mUpdateTimeTask, 100);
     }
 
     @Override
-    public boolean onUnbind(Intent intent)
-    {
+    public boolean onUnbind(Intent intent) {
         progressBarHandler.removeCallbacks(mUpdateTimeTask);
         Thread.currentThread().interrupt();
         unregisterReceiver(mediaControlsBroadcastReceiver);
@@ -412,8 +353,7 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
 
 
     @Override
-    public void onDestroy()
-    {
+    public void onDestroy() {
         super.onDestroy();
         progressBarHandler.removeCallbacks(mUpdateTimeTask);
         Thread.currentThread().interrupt();
@@ -421,10 +361,8 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
         notificationManager.cancel(NOTIFICATION_ID);
     }
 
-    private void showNotification()
-    {
-        if (songIndex < songs.size())
-        {
+    private void showNotification() {
+        if (songIndex < songs.size()) {
             currentSong = songs.get(songIndex);
             String title = currentSong.getTitle();
             String artist = currentSong.getArtist();
@@ -458,23 +396,18 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
 
     }
 
-    private void updateNotification()
-    {
-        if (player.isPlaying())
-        {
+    private void updateNotification() {
+        if (player.isPlaying()) {
             remoteViews.setViewVisibility(R.id.custom_notification_btPlay, View.VISIBLE);
             remoteViews.setViewVisibility(R.id.custom_notification_btPause, View.GONE);
-        }
-        else
-        {
+        } else {
             remoteViews.setViewVisibility(R.id.custom_notification_btPlay, View.GONE);
             remoteViews.setViewVisibility(R.id.custom_notification_btPause, View.VISIBLE);
         }
         mNotificationManager.notify(NOTIFICATION_ID, notification);
     }
 
-    private void setListeners(RemoteViews view)
-    {
+    private void setListeners(RemoteViews view) {
         Intent previous = new Intent(NOTIFY_PREVIOUS);
         Intent delete = new Intent(NOTIFY_STOP);
         Intent pause = new Intent(NOTIFY_PAUSE);
@@ -503,13 +436,10 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
     AudioManager audioManager;
 
     @SuppressLint("NewApi")
-    private void registerRemoteClient()
-    {
+    private void registerRemoteClient() {
         remoteComponentName = new ComponentName(getApplicationContext(), this.getClass().getName());
-        try
-        {
-            if (remoteControlClient == null)
-            {
+        try {
+            if (remoteControlClient == null) {
                 audioManager.registerMediaButtonEventReceiver(remoteComponentName);
                 Intent mediaButtonIntent = new Intent(Intent.ACTION_MEDIA_BUTTON);
                 mediaButtonIntent.setComponent(remoteComponentName);
@@ -524,39 +454,31 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
                             RemoteControlClient.FLAG_KEY_MEDIA_STOP |
                             RemoteControlClient.FLAG_KEY_MEDIA_PREVIOUS |
                             RemoteControlClient.FLAG_KEY_MEDIA_NEXT);
-        }
-        catch (Exception ex)
-        {
+        } catch (Exception ex) {
         }
     }
 
-    private void updateLockScreen(Song song)
-    {
-        if (remoteControlClient == null)
-        {
+    private void updateLockScreen(Song song) {
+        if (remoteControlClient == null) {
             return;
         }
         RemoteControlClient.MetadataEditor metadataEditor = remoteControlClient.editMetadata(true);
         metadataEditor.putString(MediaMetadataRetriever.METADATA_KEY_ALBUM, song.getArtist());
         metadataEditor.putString(MediaMetadataRetriever.METADATA_KEY_ARTIST, song.getArtist());
         metadataEditor.putString(MediaMetadataRetriever.METADATA_KEY_TITLE, song.getTitle());
-        Target artworkTarget = new Target()
-        {
+        Target artworkTarget = new Target() {
             @Override
-            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom loadedFrom)
-            {
+            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom loadedFrom) {
                 remoteControlClient.editMetadata(false).putBitmap(RemoteControlClient.MetadataEditor.BITMAP_KEY_ARTWORK,
                         bitmap).apply();
             }
 
             @Override
-            public void onBitmapFailed(Drawable drawable)
-            {
+            public void onBitmapFailed(Drawable drawable) {
             }
 
             @Override
-            public void onPrepareLoad(Drawable drawable)
-            {
+            public void onPrepareLoad(Drawable drawable) {
             }
         };
         Picasso.with(this).load(song.getUrlThumbnail()).skipMemoryCache().into(artworkTarget);
@@ -564,31 +486,30 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
         audioManager.requestAudioFocus(this, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN);
     }
 
-    public void updateUI()
-    {
+    public void updateUI() {
         updateProgressBar();
         updateNotification();
-        EventBus.getDefault().post(new UpdateUIEvent(musicState, songIndex, songs.get(songIndex)));
+        try {
+            EventBus.getDefault().post(new UpdateUIEvent(musicState, songIndex, songs.get(songIndex)));
+        }catch (IndexOutOfBoundsException e){
+            Log.e("trung dai ca out indext", "Trung dai ca out me indext roi");
+        }
     }
 
     @Override
-    public void onTaskRemoved(Intent rootIntent)
-    {
+    public void onTaskRemoved(Intent rootIntent) {
         super.onTaskRemoved(rootIntent);
-        if (mNotificationManager != null)
-        {
+        if (mNotificationManager != null) {
             mNotificationManager.cancel(NOTIFICATION_ID);
         }
         sharedPreferences.edit().clear().commit();
     }
 
-    public int getSongIndex()
-    {
+    public int getSongIndex() {
         return songIndex;
     }
 
-    public MusicState getMusicState()
-    {
+    public MusicState getMusicState() {
         return musicState;
     }
 }
