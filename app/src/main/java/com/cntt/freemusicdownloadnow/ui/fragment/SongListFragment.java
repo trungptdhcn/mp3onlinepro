@@ -283,18 +283,18 @@ public class SongListFragment extends BaseFragment implements AsyncTaskGetListen
             if (isAdded())
                 ((MyApplication) getActivity().getApplicationContext()).getMusicService().setSongs(songs);
         } else {
-            getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    ((MyApplication) getActivity().getApplicationContext()).getMusicService().getSongs().addAll(songs);
-                    adapter.getData().addAll(songs);
-                    adapter.notifyDataSetChanged();
-                    listView.invalidateViews();
-                    listView.requestLayout();
-                }
-            });
-
-
+            if (isAdded()) {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ((MyApplication) getActivity().getApplicationContext()).getMusicService().getSongs().addAll(songs);
+                        adapter.getData().addAll(songs);
+                        adapter.notifyDataSetChanged();
+                        listView.invalidateViews();
+                        listView.requestLayout();
+                    }
+                });
+            }
         }
         progressBar.setVisibility(View.GONE);
 
