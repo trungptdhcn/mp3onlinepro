@@ -1,27 +1,27 @@
 {
   "project_info": {
-    "project_number": "923190402536",
-    "firebase_url": "https://free-music-musicdownload-now.firebaseio.com",
-    "project_id": "free-music-musicdownload-now",
-    "storage_bucket": "free-music-musicdownload-now.appspot.com"
+    "project_number": "618382508300",
+    "firebase_url": "https://free-music-download-now.firebaseio.com",
+    "project_id": "free-music-download-now",
+    "storage_bucket": "free-music-download-now.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:923190402536:android:4d940b74a0b7a40f",
+        "mobilesdk_app_id": "1:618382508300:android:386ffedaad486a4f",
         "android_client_info": {
-          "package_name": "com.ttstudio.freemusicdownload.downloadmusic"
+          "package_name": "com.cntt.freemusicdownloadnow"
         }
       },
       "oauth_client": [
         {
-          "client_id": "923190402536-hgiro09juie81rhgb721lnvo6bm96ttc.apps.googleusercontent.com",
+          "client_id": "618382508300-u0gq9p8b51otjsd2n5q6ce4uo06mffbi.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBL_eUAnJbkivOHEvlELKUdFK6keXDzLpE"
+          "current_key": "AIzaSyB3RZJsAH4npzOf98rfPs_B9NdAcos1BRc"
         }
       ],
       "services": {

@@ -5,7 +5,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/main_bg"
-        tools:context="mp3onlinepro.trungpt.com.mp3onlinepro.MainActivity">
+        tools:context="com.cntt.freemusicdownloadnow.MainActivity">
 
     <in.srain.cube.views.GridViewWithHeaderAndFooter
             android:id="@+id/activity_main_gridview"

@@ -7,7 +7,7 @@ android {
     buildToolsVersion "23.0.3"
 
     defaultConfig {
-        applicationId "com.trungpt.topsongs"
+        applicationId "com.cntt.freemusicdownloadnow"
         minSdkVersion 15
         targetSdkVersion 23
         versionCode 2

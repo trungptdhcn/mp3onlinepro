@@ -14,23 +14,23 @@
     <permission android:name="android.permission.MEDIA_CONTENT_CONTROL"/>
 
     <application
-            android:name=".MyApplication"
+            android:name="com.cntt.freemusicdownloadnow.MyApplication"
             android:allowBackup="true"
             android:icon="@mipmap/ic_app"
             android:label="@string/app_name"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name="com.cntt.freemusicdownloadnow.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.PlaylistActivity">
+        <activity android:name="com.cntt.freemusicdownloadnow.ui.activity.PlaylistActivity">
         </activity>
 
-        <receiver android:name=".player.MediaControlsBroadcastReceiver">
+        <receiver android:name="com.cntt.freemusicdownloadnow.player.MediaControlsBroadcastReceiver">
             <intent-filter>
                 <action android:name="com.trungpt.mp3downloadpro.stop"/>
                 <action android:name="com.trungpt.mp3downloadpro.pause"/>
@@ -43,7 +43,7 @@
         </receiver>
 
         <service
-                android:name=".player.MusicService"
+                android:name="com.cntt.freemusicdownloadnow.player.MusicService"
                 android:exported="true"
                 tools:ignore="ExportedService">
             <intent-filter>
@@ -52,11 +52,11 @@
         </service>
 
         <activity
-                android:name=".ui.activity.SongDetailsActivity"
+                android:name="com.cntt.freemusicdownloadnow.ui.activity.SongDetailsActivity"
                 android:launchMode="singleTask"
                 android:theme="@style/AppFullScreenTheme">
         </activity>
-        <activity android:name=".ui.activity.YourFavoriteActivity">
+        <activity android:name="com.cntt.freemusicdownloadnow.ui.activity.YourFavoriteActivity">
         </activity>
 
         <meta-data
@@ -66,7 +66,7 @@
                   android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
                   android:theme="@android:style/Theme.Translucent" />
 
-        <service android:name=".base.NotificationFirebaseMessagingService">
+        <service android:name="com.cntt.freemusicdownloadnow.base.NotificationFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

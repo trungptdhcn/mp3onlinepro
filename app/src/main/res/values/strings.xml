@@ -1,7 +1,23 @@
 <resources>
     <string name="app_name">Top Songs</string>
-    <string name="ads_banner">ca-app-pub-2070889388904947/9365369314</string>
-    <string name="ads_fullscreen">ca-app-pub-2070889388904947/3318835716</string>
-    <string name="ads_native">ca-app-pub-2070889388904947/7330232910</string>
-    <string name="app_id">ca-app-pub-2070889388904947/7330232910</string>
+    <string name="ads_banner">ca-app-pub-1334282945983280/3682731050</string>
+    <string name="ads_fullscreen">ca-app-pub-1334282945983280/5159464259</string>
+    <string name="ads_native">ca-app-pub-1334282945983280/6636197451</string>
+    <string name="app_id">ca-app-pub-1334282945983280~2205997856</string>
 </resources>
+
+        <!--Free Music Full-->
+        <!--Ad unit ID: ca-app-pub-1334282945983280/5159464259-->
+        <!--Interstitial-->
+        <!--1 ad source-->
+        <!--Ad unit-level: No cap-->
+        <!--App-level: No cap-->
+
+        <!--Free Music Native-->
+        <!--Ad unit ID: ca-app-pub-1334282945983280/6636197451-->
+        <!--Native-->
+        <!--1 ad source-->
+        <!--Not applicable-->
+
+        <!--Free MusicBanner - Edit-->
+        <!--Ad unit ID: ca-app-pub-1334282945983280/3682731050-->

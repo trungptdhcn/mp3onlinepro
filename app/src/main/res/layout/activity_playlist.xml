@@ -108,7 +108,7 @@
             android:id="@+id/pager"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:context=".MainActivity"
+            tools:context="com.cntt.freemusicdownloadnow.MainActivity"
             android:layout_below="@+id/activity_playlist_title_bar"/>
 
 </RelativeLayout>

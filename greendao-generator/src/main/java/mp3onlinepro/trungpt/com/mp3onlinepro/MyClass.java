@@ -11,7 +11,7 @@ public class MyClass
 
     public static void main(String[] args)
     {
-        Schema schema = new Schema(1, "mp3onlinepro.trungpt.com.mp3onlinepro.db");
+        Schema schema = new Schema(1, "com.cntt.freemusicdownloadnow.db");
         schema.enableKeepSectionsByDefault();
 
         addTables(schema);

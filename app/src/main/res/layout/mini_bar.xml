@@ -87,7 +87,7 @@
                     android:layout_height="40.0dip"
                     android:layout_margin="5.0dip"
             />
-            <mp3onlinepro.trungpt.com.mp3onlinepro.ui.customview.ArcImageView
+            <com.cntt.freemusicdownloadnow.ui.customview.ArcImageView
                     android:id="@+id/mini_bar_time_arc"
                     android:layout_width="40.0dip"
                     android:layout_height="40.0dip"
