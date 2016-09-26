@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issues format="4" by="lint 25.1.7">
+
+    <issue
+        id="ResourceType"
+        severity="Fatal"
+        message="Expected resource of type styleable"
+        category="Correctness"
+        priority="7"
+        summary="Wrong Resource Type"
+        explanation="Ensures that resource id&apos;s passed to APIs are of the right type; for example, calling `Resources.getColor(R.string.name)` is wrong."
+        errorLine1="        tabTextColor = a.getColor(1, tabTextColor);"
+        errorLine2="                                  ~">
+        <location
+            file="/Users/TRUNGPT/Documents/Work/private/MMO/project/mp3onlinepro/library/src/com/astuetz/PagerSlidingTabStrip.java"
+            line="142"
+            column="35"/>
+    </issue>
+
+    <issue
+        id="ResourceType"
+        severity="Fatal"
+        message="Expected resource of type styleable"
+        category="Correctness"
+        priority="7"
+        summary="Wrong Resource Type"
+        explanation="Ensures that resource id&apos;s passed to APIs are of the right type; for example, calling `Resources.getColor(R.string.name)` is wrong."
+        errorLine1="        tabTextColorChange = a.getColor(1, tabTextColorChange);"
+        errorLine2="                                        ~">
+        <location
+            file="/Users/TRUNGPT/Documents/Work/private/MMO/project/mp3onlinepro/library/src/com/astuetz/PagerSlidingTabStrip.java"
+            line="143"
+            column="41"/>
+    </issue>
+
+    <issue
+        id="GradleDeprecated"
+        severity="Warning"
+        message="&apos;android-library&apos; is deprecated; use &apos;com.android.library&apos; instead"
+        category="Correctness"
+        priority="6"
+        summary="Deprecated Gradle Construct"
+        explanation="This detector looks for deprecated Gradle constructs which currently work but will likely stop working in a future update."
+        errorLine1="apply plugin: &apos;android-library&apos;"
+        errorLine2="~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/TRUNGPT/Documents/Work/private/MMO/project/mp3onlinepro/library/build.gradle"
+            line="1"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        severity="Warning"
+        message="A newer version of com.android.support:support-v4 than 19.0.0 is available: 24.2.0"
+        category="Correctness"
+        priority="4"
+        summary="Obsolete Gradle Dependency"
+        explanation="This detector looks for usages of libraries where the version you are using is not the current stable release. Using older versions is fine, and there are cases where you deliberately want to stick with an older version. However, you may simply not be aware that a more recent version is available, and that is what this lint check helps find."
+        errorLine1="    compile &apos;com.android.support:support-v4:19.0.0&apos;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/TRUNGPT/Documents/Work/private/MMO/project/mp3onlinepro/library/build.gradle"
+            line="4"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        severity="Warning"
+        message="Old buildToolsVersion 23.0.2; recommended version is 23.0.3 or later"
+        category="Correctness"
+        priority="4"
+        summary="Obsolete Gradle Dependency"
+        explanation="This detector looks for usages of libraries where the version you are using is not the current stable release. Using older versions is fine, and there are cases where you deliberately want to stick with an older version. However, you may simply not be aware that a more recent version is available, and that is what this lint check helps find."
+        errorLine1="    buildToolsVersion &quot;23.0.2&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/TRUNGPT/Documents/Work/private/MMO/project/mp3onlinepro/library/build.gradle"
+            line="9"
+            column="5"/>
+    </issue>
+
+</issues>

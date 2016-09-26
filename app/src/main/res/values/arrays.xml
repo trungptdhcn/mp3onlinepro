@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="query_suggestions">
+        <item>taylor swift</item>
+        <item>justin bieber</item>
+        <item>shakira</item>
+        <item>maroon 5</item>
+        <item>Charlie Puth</item>
+        <item>We Dont Talk Anymore</item>
+    </string-array>
+</resources>

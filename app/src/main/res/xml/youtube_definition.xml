@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<categories>
+    <category id="" name="Any"/>
+    <category id="high" name="HD Video"/>
+    <category id="standard" name="Standard Video"/>
+</categories>

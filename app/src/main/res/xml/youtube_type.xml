@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<categories>
+    <category id="" name="All"/>
+    <category id="video" name="Video"/>
+    <category id="channel" name="Channel"/>
+    <category id="playlist" name="Playlist"/>
+</categories>

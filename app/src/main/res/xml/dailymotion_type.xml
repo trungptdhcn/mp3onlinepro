@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<categories>
+    <category id="" name="Any"/>
+    <category id="video" name="Videos"/>
+    <category id="users" name="Users"/>
+    <category id="channels" name="Channels"/>
+    <category id="playlists" name="Playlists"/>
+</categories>

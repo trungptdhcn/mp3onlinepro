@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
+          package="mp3onlinepro.trungpt.com.mp3onlinepro">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
+
+    <permission android:name="android.permission.MEDIA_CONTENT_CONTROL"/>
+
+    <application
+            android:name=".MyApplication"
+            android:allowBackup="true"
+            android:icon="@mipmap/ic_app"
+            android:label="@string/app_name"
+            android:supportsRtl="true"
+            android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.activity.PlaylistActivity">
+        </activity>
+
+        <receiver android:name=".player.MediaControlsBroadcastReceiver">
+            <intent-filter>
+                <action android:name="com.trungpt.mp3downloadpro.stop"/>
+                <action android:name="com.trungpt.mp3downloadpro.pause"/>
+                <action android:name="com.trungpt.mp3downloadpro.play"/>
+                <action android:name="com.trungpt.mp3downloadpro.next"/>
+                <action android:name="com.trungpt.mp3downloadpro.previous"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </receiver>
+
+        <service
+                android:name=".player.MusicService"
+                android:exported="true"
+                tools:ignore="ExportedService">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </service>
+
+        <activity
+                android:name=".ui.activity.SongDetailsActivity"
+                android:launchMode="singleTask"
+                android:theme="@style/AppFullScreenTheme">
+        </activity>
+        <activity android:name=".ui.activity.YourFavoriteActivity">
+        </activity>
+
+        <meta-data
+                android:name="com.google.android.gms.version"
+                android:value="@integer/google_play_services_version" />
+        <activity android:name="com.google.android.gms.ads.AdActivity"
+                  android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+                  android:theme="@android:style/Theme.Translucent" />
+
+        <service android:name=".base.NotificationFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+    </application>
+
+</manifest>

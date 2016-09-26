@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<categories>
+    <category id="random" name="Random"/>
+    <category id="recent" name="Recent"/>
+    <category id="visited" name="Visited"/>
+    <category id="visited-hour" name="Visited-hour"/>
+    <category id="visited-today" name="Visited-today "/>
+    <category id="visited-week" name="Visited-week"/>
+    <category id="visited-mont" name="Visited-month"/>
+    <category id="comment" name="Comment"/>
+    <category id="relevance" name="Relevance"/>
+    <category id="ranking" name="Ranking"/>
+    <category id="trending" name="Trending"/>
+    <category id="old" name="Old"/>
+</categories>

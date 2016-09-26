@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <RelativeLayout
+            android:id="@+id/view_header_rlInfomation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+    >
+
+        <ImageView
+                android:id="@+id/view_header_imageView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/cover"/>
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="200dp"
+                android:background="@drawable/bg_media_controller"
+        >
+            <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="@dimen/spacing_normal"
+            >
+                <de.hdodenhof.circleimageview.CircleImageView
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/view_header_ivPlayListThumbnail"
+                        android:src="@drawable/avatar_default"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        app:civ_border_width="1dp"
+                        android:layout_centerVertical="true"
+                        app:civ_border_color="@color/gray"/>
+                <TextView
+                        android:id="@+id/view_header_tvArtist"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:text="YOUR FAVORITE SONGS"
+                        android:textStyle="bold"
+                        android:textColor="@color/green_dark"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/spacing_normal"
+                        android:layout_toRightOf="@+id/view_header_ivPlayListThumbnail"/>
+            </RelativeLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+</RelativeLayout>

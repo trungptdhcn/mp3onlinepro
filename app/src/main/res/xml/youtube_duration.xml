@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<categories>
+    <category id="" name="Any"/>
+    <category id="long" name="Long"/>
+    <category id="medium" name="Medium"/>
+    <category id="short" name="Short"/>
+</categories>

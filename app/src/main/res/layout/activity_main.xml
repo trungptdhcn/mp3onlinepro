@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/main_bg"
+        tools:context="mp3onlinepro.trungpt.com.mp3onlinepro.MainActivity">
+
+    <in.srain.cube.views.GridViewWithHeaderAndFooter
+            android:id="@+id/activity_main_gridview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:verticalSpacing="@dimen/spacing_normal"
+            android:horizontalSpacing="@dimen/spacing_normal"
+            android:numColumns="3"
+            android:gravity="center"
+            android:layout_marginTop="?attr/actionBarSize"
+            android:layout_centerInParent="true"
+            android:background="@android:color/transparent"
+            android:layout_below="@+id/toolbar_container"
+    />
+    <ListView
+            android:id="@+id/activity_main_listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:verticalSpacing="@dimen/spacing_normal"
+            android:horizontalSpacing="@dimen/spacing_normal"
+            android:gravity="center"
+            android:layout_below="@+id/toolbar_container"
+            android:layout_marginTop="?attr/actionBarSize"
+            android:layout_centerInParent="true"
+            android:visibility="gone"/>
+    <include layout="@layout/toolbar_main"/>
+    <ProgressBar
+            android:id="@+id/activity_main_progressbar"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            android:layout_gravity="center"
+    />
+</FrameLayout>

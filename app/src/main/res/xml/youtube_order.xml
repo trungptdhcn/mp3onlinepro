@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<categories>
+    <category id="relevance" name="Relevance"/>
+    <category id="date" name="Date Created"/>
+    <category id="rating" name="Rating"/>
+    <category id="title" name="Alphabetically "/>
+    <category id="videoCount" name="Video count"/>
+    <category id="viewCount" name="View count"/>
+</categories>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black"
+        android:minHeight="50dp"
+        android:paddingBottom="@dimen/spacing_small"
+        android:paddingTop="@dimen/spacing_small"
+        android:paddingLeft="@dimen/spacing_normal"
+        android:id="@+id/playlist_item_rlRootView"
+>
+    <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/playlist_item_ivThumbnail"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/default_album_mid"
+            android:layout_centerVertical="true"
+            android:scaleType="centerCrop"/>
+
+    <LinearLayout
+            android:id="@+id/playlist_item_llContent"
+            android:layout_toRightOf="@+id/playlist_item_ivThumbnail"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/spacing_small"
+            android:layout_marginRight="@dimen/spacing_small"
+            android:layout_toLeftOf="@+id/playlist_item_tvDuration">
+        <TextView
+                android:id="@+id/playlist_item_tvTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_normaler"
+                android:textColor="@color/white"
+                android:text="Trung dai ca"
+                android:maxLines="1"
+                android:ellipsize="end"
+        />
+        <TextView
+                android:id="@+id/playlist_item_tvSinger"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_small"
+                android:textColor="@color/gray"
+                android:text="Trung dai ca"
+                android:maxLines="1"
+                android:ellipsize="end"
+        />
+    </LinearLayout>
+    <TextView
+            android:id="@+id/playlist_item_tvDuration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_normal"
+            android:textColor="@color/white"
+            android:text="3:05"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/spacing_small"
+    />
+</RelativeLayout>

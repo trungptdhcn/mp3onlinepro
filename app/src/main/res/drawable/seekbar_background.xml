@@ -1,0 +1,77 @@
+<!--<layer-list xmlns:android="http://schemas.android.com/apk/res/android">-->
+
+<!--<item android:id="@android:id/background">-->
+<!--<shape>-->
+<!--<gradient-->
+<!--android:startColor="@color/gray_transparent"-->
+<!--android:endColor="@color/gray_transparent"-->
+<!--android:angle="270"-->
+<!--/>-->
+<!--</shape>-->
+<!--</item>-->
+
+<!--<item android:id="@android:id/secondaryProgress">-->
+<!--<clip>-->
+<!--<shape>-->
+<!--<gradient-->
+<!--android:startColor="#808ef0"-->
+<!--android:endColor="#808ef0"-->
+<!--android:angle="270"-->
+<!--/>-->
+<!--</shape>-->
+<!--</clip>-->
+<!--</item>-->
+<!--<item android:id="@android:id/progress">-->
+<!--<clip>-->
+<!--<shape>-->
+<!--<gradient-->
+<!--android:startColor="#ffcc33"-->
+<!--android:endColor="#ffcc33"-->
+<!--android:angle="270" />-->
+<!--</shape>-->
+<!--</clip>-->
+<!--</item>-->
+<!--</layer-list>-->
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@android:id/background"
+          android:gravity="center_vertical|fill_horizontal">
+        <shape android:shape="rectangle"
+               android:tint="?attr/colorControlNormal">
+            <size android:height="@dimen/spacing_mini"/>
+            <solid android:color="@color/white"/>
+        </shape>
+    </item>
+    <item android:id="@android:id/secondaryProgress"
+          android:gravity="center_vertical|fill_horizontal">
+        <scale android:scaleWidth="100%">
+            <selector>
+                <item android:state_enabled="false"
+                      android:drawable="@color/red_tranparent"/>
+                <item>
+                    <shape android:shape="rectangle"
+                           android:tint="?attr/colorControlActivated">
+                        <size android:height="@dimen/spacing_mini"/>
+                        <solid android:color="@color/red_tranparent"/>
+                    </shape>
+                </item>
+            </selector>
+        </scale>
+    </item>
+    <item android:id="@android:id/progress"
+          android:gravity="center_vertical|fill_horizontal">
+        <scale android:scaleWidth="100%">
+            <selector>
+                <item android:state_enabled="false"
+                      android:drawable="@color/red"/>
+                <item>
+                    <shape android:shape="rectangle"
+                           android:tint="?attr/colorControlActivated">
+                        <size android:height="@dimen/spacing_mini"/>
+                        <solid android:color="@color/red"/>
+                    </shape>
+                </item>
+            </selector>
+        </scale>
+    </item>
+</layer-list>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<categories>
+    <category id="" name="Any"/>
+    <category id="animation" name="Animation"/>
+    <category id="art" name="Arts &amp; Design"/>
+    <category id="cameratechniques" name="Cameras &amp; Techniques"/>
+    <category id="comedy" name="Comedy"/>
+    <category id="documentary" name="Documentary"/>
+    <category id="experimental" name="Experimental"/>
+    <category id="fashion" name="Fashion"/>
+    <category id="food" name="Food"/>
+    <category id="instructionals" name="Instructionals"/>
+    <category id="music" name="Music"/>
+    <category id="narrative" name="Narrative"/>
+    <category id="personal" name="Personal"/>
+    <category id="journalism" name="Reporting &amp; Journalism"/>
+    <category id="sports" name="Sports"/>
+    <category id="talks" name="Talks"/>
+    <category id="travel" name="Travel"/>
+</categories>

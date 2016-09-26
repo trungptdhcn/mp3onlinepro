@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#000000</color>
+    <color name="green_light">#31c27c</color>
+    <color name="gray">#BEBEBE</color>
+    <color name="gray_dark">#666666</color>
+    <color name="gray_transparent">#D9BEBEBE</color>
+    <color name="gray_21">#363636</color>
+    <color name="white">#ffffff</color>
+    <color name="white_transparent">#0DFFFFFF</color>
+    <color name="red">#CC0000</color>
+    <color name="orange">#FFCC33</color>
+    <color name="red_simi">#FF3030</color>
+    <color name="red_tranparent">#A6FF3030</color>
+    <color name="red_simi_press">#EE2C2C</color>
+    <color name="black_transparent">#A6000000</color>
+    <color name="blue">#0000AA</color>
+    <color name="black_semi_transparent">#B3000000</color>
+    <color name="background">#e5e5e5</color>
+    <color name="half_black">#808080</color>
+    <color name="half_black_transparent">#A6808080</color>
+    <color name="white_pressed">#f1f1f1</color>
+    <color name="pink">#e91e63</color>
+    <color name="pink_pressed">#ec407a</color>
+    <color name="blue_semi">#172534</color>
+    <color name="blue_vimeo">#1ab7ea</color>
+    <color name="blue_facebook">#3b5997</color>
+    <color name="blue_semi_pressed">#738ffe</color>
+    <color name="blue_semi_transparent">#805677fc</color>
+    <color name="blue_semi_transparent_pressed">#80738ffe</color>
+    <color name="material_purple_500">#E74C3C</color>
+    <color name="material_light_yellow_800">#f8a822</color>
+    <color name="material_yellow_50">#fdf7e2</color>
+    <color name="accent">#40C4FF</color>
+    <color name="white_smoke">#F5F5F5</color>
+    <color name="apptheme_color">#33b5e5</color>
+    <color name="green_dark">#008C5E</color>
+    <color name="blue_dark">#172534</color>
+
+    <color name="tv_branding">#ffff5722</color>
+    <color name="tv_branding_dark">#ffbf360c</color>
+    <color name="tv_branding_accent">#00B8D4</color>
+    <color name="bt_accent">#00B8D4</color>
+    <color name="media_item_icon_playing">@color/bt_accent</color>
+    <color name="media_item_icon_not_playing">#ccc</color>
+    <color name="drawer_header_background">@color/bt_accent</color>
+    <color name="error_message_background">#ffff1600</color>
+    <color name="drawer_item_selected_background">#feee</color>
+    <color name="drawer_item_tint_color">#ff333333</color>
+    <color name="fullscreen_secondary_line_color">#E5CCCCCC</color>
+    <color name="fullscreen_line_color">#E5FFFFFF</color>
+    <color name="tv_search_button">#ff0097A7</color>
+    <color name="background_gradient_start">#000000</color>
+    <color name="background_gradient_end">#DDDDDD</color>
+    <color name="default_background">#0096a6</color>
+    <!--===========================================================-->
+    <!--Indigo 500-->
+    <color name="primary_500">#3F51B5</color>
+    <!--Indigo 700-->
+    <color name="primary_700">#303F9F</color>
+    <!--Pink 500-->
+    <color name="accent_500">#E91E63</color>
+    <!--Pink 700-->
+    <color name="accent_700">#C2185B</color>
+    <color name="black_trans80">#33000000</color>
+
+    <!--==========================Navigation drawable=======================-->
+    <color name="session_photo_scrim">#6000</color>
+
+    <!--==================ProgressBar======================-->
+    <integer-array name="gplus_colors">
+        <item>@color/red_simi</item>
+        <item>@color/blue</item>
+        <item>@color/material_light_yellow_800</item>
+    </integer-array>
+
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+</resources>

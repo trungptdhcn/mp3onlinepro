@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<categories>
+    <category id="" name="Any"/>
+    <category id="recent" name="Recent"/>
+    <category id="relevance" name="Relevance"/>
+    <category id="alpha" name="Alpha"/>
+    <category id="most" name="Most"/>
+    <category id="least" name="Least"/>
+</categories>

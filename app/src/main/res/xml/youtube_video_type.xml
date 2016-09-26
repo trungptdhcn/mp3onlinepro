@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<categories>
+    <category id="" name="Any"/>
+    <category id="episode" name="Episode"/>
+    <category id="movie" name="Movie"/>
+</categories>
